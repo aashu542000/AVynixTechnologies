@@ -1,0 +1,28 @@
+{
+  "name": "avynix-landing-page",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "framer-motion": "^6.5.1",
+    "next": "^12.3.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^17.0.0",
+    "eslint": "8.56.0",
+    "eslint-config-next": "12.0.0",
+    "typescript": "^5.0.0"
+  }
+}
