@@ -1,11 +1,17 @@
 :root {
-  --primary-color: #0070f3;
-  --secondary-color: #7928ca;
-  --background-color: #0a0a0a;
-  --text-color: #eaeaea;
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --border-color: rgba(255, 255, 255, 0.1);
-  --glow-color: rgba(0, 112, 243, 0.5);
+  --primary-color: #6366f1;
+  /* Indigo 500 */
+  --secondary-color: #06b6d4;
+  /* Cyan 500 */
+  --background-color: #020617;
+  /* Slate 950 */
+  --text-color: #94a3b8;
+  /* Slate 400 */
+  --card-bg: rgba(30, 41, 59, 0.5);
+  /* Slate 800 with transparency */
+  --border-color: rgba(51, 65, 85, 0.5);
+  /* Slate 700 with transparency */
+  --glow-color: rgba(99, 102, 241, 0.3);
 
   --font-heading: 'Inter', system-ui, sans-serif;
   --font-body: 'Roboto', system-ui, sans-serif;
@@ -43,13 +49,13 @@ h2,
 h3 {
   font-family: var(--font-heading);
   font-weight: 700;
-  color: #fff;
+  color: #f8fafc;
+  /* Slate 50 */
   margin-bottom: 1rem;
 }
 
 /* Layout */
 .container {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -60,11 +66,19 @@ header {
   align-items: center;
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--border-color);
-  background: rgba(10, 10, 10, 0.8);
-  backdrop-filter: blur(10px);
+  background: rgba(2, 6, 23, 0.8);
+  /* Slate 950 with blur */
+  backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
   z-index: 100;
+  transition: padding 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+  header {
+    padding: 2rem 0;
+  }
 }
 
 /* Logo Styles */
@@ -73,7 +87,7 @@ header {
   align-items: center;
   /* Logo image provides its own dimensions via next/image props, 
      but we can constrain the container if needed */
-  max-width: 200px;
+  width: 200px;
 }
 
 nav {
@@ -103,63 +117,121 @@ nav a:hover::after {
 
 /* Hero Section */
 .hero {
-  min-height: 80vh;
+  min-height: 85vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 4rem 0;
-  background: radial-gradient(circle at center, rgba(0, 112, 243, 0.1) 0%, rgba(10, 10, 10, 0) 70%);
+  padding: 6rem 0;
+  background:
+    radial-gradient(circle at top right, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.15) 0%, transparent 40%);
 }
 
 .hero h1 {
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
   line-height: 1.1;
-  background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+  background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1.5rem;
-  max-width: 800px;
+  max-width: 900px;
 }
 
 .hero p {
-  font-size: 1.25rem;
-  color: #ccc;
-  max-width: 600px;
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  color: #94a3b8;
+  /* Slate 400 */
+  max-width: 700px;
   margin-bottom: 2.5rem;
 }
 
 .cta-button {
   display: inline-block;
-  padding: 1rem 2rem;
-  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  padding: 1.1rem 2.2rem;
   color: #fff;
   border-radius: 50px;
   font-weight: 600;
-  box-shadow: 0 4px 15px var(--glow-color);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: transparent;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.cta-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent,
+      var(--primary-color),
+      var(--secondary-color),
+      transparent 30%);
+  animation: rotate 4s linear infinite;
+  z-index: -2;
+}
+
+.cta-button::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: #020617;
+  /* Dark background inside */
+  background-image: linear-gradient(90deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.2));
+  border-radius: 50px;
+  z-index: -1;
+  transition: background 0.3s ease;
+}
+
 .cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px var(--glow-color);
+  box-shadow: 0 0 20px var(--glow-color);
+}
+
+.cta-button:hover::after {
+  background-image: linear-gradient(90deg, rgba(0, 112, 243, 0.3), rgba(121, 40, 202, 0.3));
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* About Section */
 .about {
-  padding: 6rem 0;
-  background: linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(20, 20, 20, 0.5) 100%);
+  padding: 10rem 0;
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0) 0%, #0f172a 100%);
+  /* Slate 950 to Slate 900 */
   text-align: center;
 }
 
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
 .about p {
-  font-size: 1.1rem;
-  color: #ddd;
-  max-width: 800px;
-  margin: 0 auto 1.5rem;
+  font-size: 1.15rem;
+  color: #94a3b8;
   line-height: 1.8;
+}
+
+@media (min-width: 1024px) {
+  .about {
+    padding: 12rem 0;
+  }
 }
 
 /* Services Section */
@@ -190,7 +262,8 @@ nav a:hover::after {
 .card:hover {
   transform: translateY(-5px);
   border-color: var(--primary-color);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(30, 41, 59, 0.8);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .card h3 {
@@ -205,9 +278,15 @@ nav a:hover::after {
 
 /* Contact Section */
 .contact {
-  padding: 6rem 0;
-  background: #0f0f0f;
+  padding: 10rem 0;
+  background: #020617;
   text-align: center;
+  border-top: 1px solid var(--border-color);
+}
+
+.contact-card {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .contact h2 {
@@ -234,11 +313,15 @@ nav a:hover::after {
 }
 
 footer {
-  padding: 2rem 0;
+  padding: 3rem 0;
   text-align: center;
-  border-top: 1px solid var(--border-color);
-  color: #666;
+  background: #1e293b;
+  color: #94a3b8;
   font-size: 0.9rem;
+}
+
+footer p {
+  color: #cbd5e1;
 }
 
 /* Mobile Menu Button */
@@ -255,7 +338,7 @@ footer {
   display: block;
   width: 24px;
   height: 2px;
-  background: #fff;
+  background: #f8fafc;
   position: relative;
   transition: all 0.3s ease-in-out;
 }
@@ -266,7 +349,7 @@ footer {
   position: absolute;
   width: 24px;
   height: 2px;
-  background: #fff;
+  background: #f8fafc;
   left: 0;
   transition: all 0.3s ease-in-out;
 }
@@ -310,7 +393,7 @@ footer {
     right: 0;
     width: 70%;
     height: 100vh;
-    background: rgba(10, 10, 10, 0.95);
+    background: rgba(2, 6, 23, 0.98);
     backdrop-filter: blur(20px);
     flex-direction: column;
     justify-content: center;
@@ -329,7 +412,7 @@ footer {
 
   nav a {
     font-size: 1.5rem;
-    color: #fff;
+    color: #f8fafc;
   }
 
   .hero h1 {

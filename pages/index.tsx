@@ -142,6 +142,7 @@ export default function Home() {
                         <div className="contact-card">
                             <p><strong>Contact:</strong> Vinay Tiwari</p>
                             <p><strong>Call/WhatsApp:</strong> <a href="tel:+919137918782" style={{ color: 'var(--primary-color)' }}>+91 9137918782</a></p>
+                            <p><strong>Email:</strong> <a href="mailto:avynixtechnologies@gmail.com" style={{ color: 'var(--primary-color)' }}>avynixtechnologies@gmail.com</a></p>
                             <p><strong>Location:</strong> Mumbai, India</p>
                         </div>
                     </motion.div>
